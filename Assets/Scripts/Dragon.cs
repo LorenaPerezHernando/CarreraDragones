@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Dragon : MonoBehaviour
 {
@@ -27,7 +28,12 @@ public class Dragon : MonoBehaviour
     private void Update()
     {
         
-       
+       // Limitar la rotación en los ejes X y Z a 0
+        Vector3 currentRotation = transform.rotation.eulerAngles;
+        currentRotation.x = 0; // Limitando la rotación en X a 0
+        currentRotation.z = 0; // Limitando la rotación en Z a 0
+        transform.rotation = Quaternion.Euler(currentRotation);
+      
         //Moverse 
         if (Input.GetKey(KeyCode.S) && gameObject.tag == "Player")
         {           
@@ -78,8 +84,8 @@ public class Dragon : MonoBehaviour
         float rotation = speedRotation * direccion ;
 
         //Rotar personaje
-        transform.Rotate(Vector3.up, rotation);
-        //transform.Rotate(0, rotation, 0);
+        //transform.Rotate(Vector3.up, rotation);
+        transform.Rotate(0, rotation, 0);
 
     }
 #region Rotar al chocar con obstaculo
@@ -94,12 +100,25 @@ public class Dragon : MonoBehaviour
     }
     IEnumerator RotateCauseObstacle()
     {  
-        print("AnimatorRotate");
-        GetComponent<Animator>().SetBool("Rotate1", true);
-        speed = 0; 
-        yield return new WaitForSeconds(1); //!!!bloquear la camara 
-        GetComponent<Animator>().SetBool("Rotate1", false);
-        speed = 0.02f; 
+        speed = 0;
+        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
+        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
+        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
+        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
+        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
+        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
+        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
+        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
+        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
+        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
+        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
+        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
+        
+        yield return new WaitForSeconds(1);
+         //!!!bloquear la camara 
+        speed = 0.02f;
+        
+        
     }
     
    #endregion

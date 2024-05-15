@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 
 public class Dragon : MonoBehaviour
 {
@@ -11,6 +9,9 @@ public class Dragon : MonoBehaviour
     public string nameDragon;
     [SerializeField] float speed = 0.02f; 
     public float speedRotation; 
+   
+
+
     public float resistObstacles; 
     public int specialPower;
 
@@ -21,66 +22,69 @@ public class Dragon : MonoBehaviour
 
     // Private Atributes
     
-    private float rotationAngle = 360; 
-    
-    
+
 
     private void Update()
     {
         
        
         //Moverse 
-        if (Input.GetKey(KeyCode.D) && gameObject.tag == "Player")
+        if (Input.GetKey(KeyCode.S) && gameObject.tag == "Player")
         {           
             //transform.position += Vector3.right *speed;
-            transform.position += transform.TransformDirection(- Vector3.right) *speed ;
+            transform.position -= transform.right *speed ;
             
         }
         
-        if (Input.GetKey(KeyCode.L) && gameObject.tag == "Player2")
+        if (Input.GetKey(KeyCode.K) && gameObject.tag == "Player2")
         {
-            transform.position -= Vector3.right * speed;
+            transform.position -= transform.right * speed;
         }
 
+        
         //Rotate
         if(Input.GetKeyDown(KeyCode.A) && gameObject.tag == "Player")
-        {
-            
-            //!!! Y tampoco me funciona el rotation
+        {           
             print("TECLA A");
-            
-            
+            Rotar(-1);
            
         }
+        if(Input.GetKeyDown(KeyCode.D) && gameObject.tag == "Player")
+        {           
+            print("TECLA A");
+            Rotar(1);
+           
+        }
+        
         
 
         //Saltar
         if(grounded.isGrounded == true && Input.GetKeyDown(KeyCode.W) && gameObject.tag == "Player")
         {
-            transform.position += Vector3.up;
+           transform.position += Vector3.up ;
             
         }
         if(grounded.isGrounded == true && Input.GetKeyDown(KeyCode.I) && gameObject.tag == "Player2")
         {
-            transform.position += Vector3.up;
+            transform.position += Vector3.up ;
             
         }
+        
     }
 
-    private void OnTriggerEnter(Collider other) {
-        /*if (obstacle.gameObject.tag == "Obstacle" )
-        {
-            if (Input.GetKey(KeyCode.D) && gameObject.tag == "Player" && rotationAngle<=360)
-            {           Debug.Log("hola");
-                transform.RotateAround(transform.position, Vector3.up, rotationAngle *Time.deltaTime * speed);
-                rotationAngle++; 
-                Debug.Log("rotate");
-            }
-            
-            
-        }*/
+    void Rotar(int direccion)
+    {
+        //Calcular angulo de rotacion
+        float rotation = speedRotation * direccion ;
 
-        
+        //Rotar personaje
+        transform.Rotate(Vector3.up, rotation);
+        //transform.Rotate(0, rotation, 0);
+
+    }
+#region Rotar al chocar con obstaculo
+    private void OnTriggerEnter(Collider other) {
+       
         if(other.gameObject.tag == "Obstacle")
         {
 
@@ -93,9 +97,11 @@ public class Dragon : MonoBehaviour
         print("AnimatorRotate");
         GetComponent<Animator>().SetBool("Rotate1", true);
         speed = 0; 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1); //!!!bloquear la camara 
         GetComponent<Animator>().SetBool("Rotate1", false);
         speed = 0.02f; 
     }
-   
+    
+   #endregion
+
 }

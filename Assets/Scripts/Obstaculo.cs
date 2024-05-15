@@ -6,7 +6,7 @@ public class Obstaculo : MonoBehaviour
 {
     //Public Propierties
     public GameObject obstaculo; //!!Puede que tenga que hacer un array 
-    public float speedRotate; 
+
     void Start()
     {
         

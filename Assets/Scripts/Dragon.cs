@@ -20,6 +20,7 @@ public class Dragon : MonoBehaviour
 
     //Public Scripts 
     public Grounded grounded;
+    public Meta meta;
 
     // Private Atributes
     
@@ -35,20 +36,21 @@ public class Dragon : MonoBehaviour
         currentRotation.z = 0; 
         transform.rotation = Quaternion.Euler(currentRotation);
 
-        //Moverse 
-        if (Input.GetKey(KeyCode.S) && gameObject.tag == "Player")
-        {           
-            //transform.position += Vector3.right *speed;
-            transform.position -= transform.right *speed ;
-            
-        }
-        
-        if (Input.GetKey(KeyCode.K) && gameObject.tag == "Player2")
+        if(meta.GameOn == true)
         {
-            transform.position -= transform.right * speed;
-        }
-
+            //Moverse 
+            if (Input.GetKey(KeyCode.S) && gameObject.tag == "Player")
+            {           
+                transform.position -= transform.right *speed ;
+            
+            }
         
+            if (Input.GetKey(KeyCode.K) && gameObject.tag == "Player2")
+            {
+                transform.position -= transform.right * speed;
+            }
+
+        }
 
         //Rotate
         if(Input.GetKey(KeyCode.A) && gameObject.tag == "Player")

@@ -28,12 +28,13 @@ public class Dragon : MonoBehaviour
     private void Update()
     {
         
-       // Limitar la rotación en los ejes X y Z a 0
+       
+      // Limitar la rotación en los ejes X y Z a 0
         Vector3 currentRotation = transform.rotation.eulerAngles;
-        currentRotation.x = 0; // Limitando la rotación en X a 0
-        currentRotation.z = 0; // Limitando la rotación en Z a 0
+        currentRotation.x = 0;
+        currentRotation.z = 0; 
         transform.rotation = Quaternion.Euler(currentRotation);
-      
+
         //Moverse 
         if (Input.GetKey(KeyCode.S) && gameObject.tag == "Player")
         {           
@@ -48,14 +49,15 @@ public class Dragon : MonoBehaviour
         }
 
         
+
         //Rotate
-        if(Input.GetKeyDown(KeyCode.A) && gameObject.tag == "Player")
+        if(Input.GetKey(KeyCode.A) && gameObject.tag == "Player")
         {           
             print("TECLA A");
             Rotar(-1);
            
         }
-        if(Input.GetKeyDown(KeyCode.D) && gameObject.tag == "Player")
+        if(Input.GetKey(KeyCode.D) && gameObject.tag == "Player")
         {           
             print("TECLA A");
             Rotar(1);
@@ -64,20 +66,21 @@ public class Dragon : MonoBehaviour
         
         
 
-        //Saltar
+        //Jump
         if(grounded.isGrounded == true && Input.GetKeyDown(KeyCode.W) && gameObject.tag == "Player")
         {
-           transform.position += Vector3.up ;
+           transform.position += Vector3.up * jump;
             
         }
         if(grounded.isGrounded == true && Input.GetKeyDown(KeyCode.I) && gameObject.tag == "Player2")
         {
-            transform.position += Vector3.up ;
+            transform.position += Vector3.up * jump;
             
         }
         
     }
 
+#region Rotar al chocar con obstaculo
     void Rotar(int direccion)
     {
         //Calcular angulo de rotacion
@@ -88,7 +91,6 @@ public class Dragon : MonoBehaviour
         transform.Rotate(0, rotation, 0);
 
     }
-#region Rotar al chocar con obstaculo
     private void OnTriggerEnter(Collider other) {
        
         if(other.gameObject.tag == "Obstacle")

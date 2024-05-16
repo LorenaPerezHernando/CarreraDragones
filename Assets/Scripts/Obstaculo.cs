@@ -14,7 +14,7 @@ public class Obstaculo : MonoBehaviour
 
    private void OnCollisionEnter(Collision other) 
    {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" || other.gameObject.tag == "Player2")
         {
            //Rotar alrededor de este objeto 
         }

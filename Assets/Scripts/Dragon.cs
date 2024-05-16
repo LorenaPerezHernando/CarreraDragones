@@ -28,8 +28,8 @@ public class Dragon : MonoBehaviour
 
     private void Update()
     {
+        //!!!bloquear la camara 
         
-       
       // Limitar la rotación en los ejes X y Z a 0
         Vector3 currentRotation = transform.rotation.eulerAngles;
         currentRotation.x = 0;
@@ -39,15 +39,24 @@ public class Dragon : MonoBehaviour
         if(meta.GameOn == true)
         {
             //Moverse 
-            if (Input.GetKey(KeyCode.S) && gameObject.tag == "Player")
+            if (Input.GetKey(KeyCode.W) && gameObject.tag == "Player")
             {           
                 transform.position -= transform.right *speed ;
             
             }
+            if (Input.GetKey(KeyCode.S) && gameObject.tag == "Player")
+            {           
+                transform.position += transform.right *speed ;
+            
+            }
         
-            if (Input.GetKey(KeyCode.K) && gameObject.tag == "Player2")
+            if (Input.GetKey(KeyCode.I) && gameObject.tag == "Player2")
             {
                 transform.position -= transform.right * speed;
+            }
+            if (Input.GetKey(KeyCode.K) && gameObject.tag == "Player2")
+            {
+                transform.position += transform.right * speed;
             }
 
         }
@@ -55,13 +64,11 @@ public class Dragon : MonoBehaviour
         //Rotate
         if(Input.GetKey(KeyCode.A) && gameObject.tag == "Player")
         {           
-            print("TECLA A");
             Rotar(-1);
            
         }
         if(Input.GetKey(KeyCode.D) && gameObject.tag == "Player")
         {           
-            print("TECLA A");
             Rotar(1);
            
         }
@@ -69,10 +76,11 @@ public class Dragon : MonoBehaviour
         
 
         //Jump
-        if(grounded.isGrounded == true && Input.GetKeyDown(KeyCode.W) && gameObject.tag == "Player")
+        if(grounded.isGrounded == true && Input.GetKeyDown(KeyCode.Space) && gameObject.tag == "Player")
         {
-           transform.position += Vector3.up * jump;
-            
+            gameObject.GetComponent<Rigidbody>().mass = 0.1f;  
+            transform.position += Vector3.up * jump;
+                  
         }
         if(grounded.isGrounded == true && Input.GetKeyDown(KeyCode.I) && gameObject.tag == "Player2")
         {
@@ -95,16 +103,24 @@ public class Dragon : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other) {
        
+      
         if(other.gameObject.tag == "Obstacle")
         {
-
+            print("StartCoroutine");
             StartCoroutine(RotateCauseObstacle());
         }   
         
     }
     IEnumerator RotateCauseObstacle()
     {  
+        print("RotateCauseObstacle");
         speed = 0;
+        speedRotation = 10; 
+
+        float startPosition = player.transform.position;
+
+        
+        
         Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
         Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
         Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
@@ -112,15 +128,19 @@ public class Dragon : MonoBehaviour
         Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
         Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
         Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
+
+        /*Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
         Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
         Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
         Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
         Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
-        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
+        */
+        
         
         yield return new WaitForSeconds(1);
-         //!!!bloquear la camara 
+        
         speed = 0.02f;
+        speedRotation = 0.2f;
         
         
     }

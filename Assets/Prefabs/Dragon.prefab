@@ -60,7 +60,7 @@ MonoBehaviour:
   speedRotation: 0.2
   resistObstacles: 0
   specialPower: 0
-  jump: 2
+  jump: 4
   grounded: {fileID: 9115765958168355757}
   meta: {fileID: 0}
 --- !u!64 &312194733623133209
@@ -80,7 +80,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 7314419195513087546}
   m_Layer: 0
   m_Name: BackLegL
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 3709978809409605224}
   m_Layer: 0
   m_Name: body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 1876170563920818474}
   m_Layer: 0
   m_Name: LegR
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 1000126247455208991}
   m_Layer: 0
   m_Name: alaDer
-  m_TagString: AlaDer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -642,7 +642,7 @@ GameObject:
   - component: {fileID: 2999218114827697054}
   m_Layer: 0
   m_Name: LegL
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -748,7 +748,7 @@ GameObject:
   - component: {fileID: 5989987045163073738}
   m_Layer: 0
   m_Name: BackLegR
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -854,7 +854,7 @@ GameObject:
   - component: {fileID: 4485806371051595214}
   m_Layer: 0
   m_Name: alaIzq
-  m_TagString: AlaIzq
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -974,8 +974,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7531927293792333693}
   m_LocalRotation: {x: 0.028637681, y: 0.08562633, z: 0.03351098, w: 0.9953518}
-  m_LocalPosition: {x: 0.295, y: -0.809, z: -0.486}
-  m_LocalScale: {x: 0.45199013, y: 0.21533264, z: 0.45199004}
+  m_LocalPosition: {x: 0.182, y: -0.992, z: -0.45}
+  m_LocalScale: {x: 0.45199013, y: 0.3248003, z: 0.45199004}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8276912278192114424}
@@ -996,7 +996,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7531927293792333693}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

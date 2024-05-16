@@ -6,12 +6,18 @@ public class Grounded : MonoBehaviour
 {
     public bool isGrounded;
 
-
-   private void OnTriggerEnter(Collider other) {
-         isGrounded = true;
+   private void Start() 
+   {
+      isGrounded = true;
+   }
+   private void OnTriggerEnter(Collider other) 
+   {
+      print("IsGrounded");
+      isGrounded = true;
    }
 
-   private void OnTriggerExit(Collider other) {
-    isGrounded = false;
+   private void OnTriggerExit(Collider other) 
+   {
+      isGrounded = false;
    }
 }

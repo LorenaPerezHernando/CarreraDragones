@@ -116,29 +116,21 @@ public class Dragon : MonoBehaviour
         print("RotateCauseObstacle");
         speed = 0;
         speedRotation = 10; 
+        Quaternion startRotation = transform.rotation;
+        Vector3 startPosition = transform.position;
 
-        float startPosition = player.transform.position;
-
         
-        
-        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
-        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
-        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
-        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
-        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
-        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
-        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
-
-        /*Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
-        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
-        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
-        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
-        Rotar(1);yield return new WaitForSeconds(0.01f);Rotar(1);yield return new WaitForSeconds(0.01f);
-        */
-        
-        
-        yield return new WaitForSeconds(1);
-        
+        for(int i = 0; i < 20; i++)
+        {
+            Rotar(1);yield return new WaitForSeconds(0.03f);
+            i++;
+            
+        }
+        //Se coloca en la misma rotacion y salta el obstaculo en x
+        transform.rotation = startRotation; 
+        transform.position = new Vector3 (startPosition.x - 1f, startPosition.y, startPosition.z);
+        //Restablece los valores
+        yield return new WaitForSeconds(0.5f);    
         speed = 0.02f;
         speedRotation = 0.2f;
         

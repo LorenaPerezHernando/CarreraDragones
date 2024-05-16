@@ -120,7 +120,7 @@ public class Dragon : MonoBehaviour
         Vector3 startPosition = transform.position;
 
         
-        for(int i = 0; i < 20; i++)
+        for(int i = 0; i < 10; i++)
         {
             Rotar(1);yield return new WaitForSeconds(0.03f);
             i++;

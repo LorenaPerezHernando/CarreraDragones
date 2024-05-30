@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Dragon : MonoBehaviour
 {
     //Public Properties
-    
+    //Pruba para github, borrar despues
+
     public string nameDragon;
     [SerializeField] float speed = 0.02f; 
     public float speedRotation; 

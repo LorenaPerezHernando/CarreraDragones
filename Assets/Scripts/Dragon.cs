@@ -60,31 +60,33 @@ public class Dragon : MonoBehaviour
 
         #endregion
          #region Rotate
-        if (Input.GetKey(KeyCode.A) && gameObject.tag == "Player")                  
-            Rotar(-1);          
+            if (Input.GetKey(KeyCode.A) && gameObject.tag == "Player")                  
+                Rotar(-1);          
         
-        if(Input.GetKey(KeyCode.D) && gameObject.tag == "Player")           
-            Rotar(1);
+            if(Input.GetKey(KeyCode.D) && gameObject.tag == "Player")           
+                Rotar(1);
 
 
-        if(Input.GetKey(KeyCode.LeftArrow) && gameObject.tag == "Player2")
-            Rotar(-1);
+            if(Input.GetKey(KeyCode.LeftArrow) && gameObject.tag == "Player2")      
+                Rotar2(-1);
+        
 
-        if (Input.GetKey(KeyCode.RightArrow) && gameObject.tag == "Player2")
-            Rotar(1);
-        #endregion
-         #region Jump !!!
-        if (grounded.isGrounded == true && Input.GetKeyDown(KeyCode.S) && gameObject.tag == "Player")
-        {
+            if (Input.GetKey(KeyCode.RightArrow) && gameObject.tag == "Player2")
+                Rotar2(1);
+
+            #endregion
+            #region Jump !!!
+            if (grounded.isGrounded == true && Input.GetKeyDown(KeyCode.S) && gameObject.tag == "Player")
+            {
             //gameObject.GetComponent<Rigidbody>().mass = 0.1f;  
             transform.position += Vector3.up * jump * Time.deltaTime;
                   
-        }
-        if(grounded.isGrounded == true && Input.GetKeyDown(KeyCode.DownArrow) && gameObject.tag == "Player2")
-        {
+            }
+            if(grounded.isGrounded == true && Input.GetKeyDown(KeyCode.DownArrow) && gameObject.tag == "Player2")
+            {
             transform.position += Vector3.up * jump * Time.deltaTime;
             
-        }
+            }
         #endregion 
         }
 
@@ -93,6 +95,18 @@ public class Dragon : MonoBehaviour
     #region Rotar al chocar con obstaculo
     void Rotar(int direccion)
     {
+        print("J1");
+        //Calcular angulo de rotacion
+        float rotation = speedRotation * direccion * Time.deltaTime;
+
+        //Rotar personaje
+        //transform.Rotate(Vector3.up, rotation);
+        transform.Rotate(0, rotation, 0);
+
+    }
+    void Rotar2(int direccion)
+    {
+        print("Rotate J2");
         //Calcular angulo de rotacion
         float rotation = speedRotation * direccion * Time.deltaTime;
 

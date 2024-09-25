@@ -3659,6 +3659,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831666251}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &859471155 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4860186755152719250, guid: 6300087197cfc8c4a9e430aebb96a7eb, type: 3}
+  m_PrefabInstance: {fileID: 2185106637980091875}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &859567441
 GameObject:
   m_ObjectHideFlags: 0
@@ -4159,12 +4164,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f61e43fc452fb4fb3a95164c62567a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameDragon: Spedo
-  speed: 0.02
-  speedRotation: 0
+  quitarCam: {fileID: 685055881}
+  nameDragon: 
   resistObstacles: 0
   specialPower: 0
-  jump: 0.02
+  speed: 4
   grounded: {fileID: 1823334226}
   meta: {fileID: 431255959}
 --- !u!4 &1053179051
@@ -8773,6 +8777,14 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2591528766472068628, guid: 6300087197cfc8c4a9e430aebb96a7eb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3011868657772328917, guid: 6300087197cfc8c4a9e430aebb96a7eb, type: 3}
+      propertyPath: m_Name
+      value: 1Camera
+      objectReference: {fileID: 0}
     - target: {fileID: 4860186755152719250, guid: 6300087197cfc8c4a9e430aebb96a7eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.4
@@ -8813,13 +8825,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.315
       objectReference: {fileID: 0}
+    - target: {fileID: 6399284072910135350, guid: 6300087197cfc8c4a9e430aebb96a7eb, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7093060163449544356, guid: 6300087197cfc8c4a9e430aebb96a7eb, type: 3}
+      propertyPath: jump
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7093060163449544356, guid: 6300087197cfc8c4a9e430aebb96a7eb, type: 3}
       propertyPath: meta
       value: 
       objectReference: {fileID: 431255959}
     - target: {fileID: 7093060163449544356, guid: 6300087197cfc8c4a9e430aebb96a7eb, type: 3}
       propertyPath: speed
-      value: 0.02
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7093060163449544356, guid: 6300087197cfc8c4a9e430aebb96a7eb, type: 3}
+      propertyPath: quitarCam
+      value: 
+      objectReference: {fileID: 859471155}
+    - target: {fileID: 7093060163449544356, guid: 6300087197cfc8c4a9e430aebb96a7eb, type: 3}
+      propertyPath: speedRotation
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7531927293792333693, guid: 6300087197cfc8c4a9e430aebb96a7eb, type: 3}
+      propertyPath: m_Icon
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8276912278192114424, guid: 6300087197cfc8c4a9e430aebb96a7eb, type: 3}
       propertyPath: m_RootOrder
@@ -8863,6 +8895,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8276912278192114424, guid: 6300087197cfc8c4a9e430aebb96a7eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9115765958168355757, guid: 6300087197cfc8c4a9e430aebb96a7eb, type: 3}
+      propertyPath: isGrounded
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

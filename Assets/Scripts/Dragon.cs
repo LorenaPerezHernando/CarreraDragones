@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,30 +8,25 @@ public class Dragon : MonoBehaviour
 {
     //Public Properties
     //Pruba para github, borrar despues
+    public Transform quitarCam;
 
     public string nameDragon;
-    [SerializeField] float speed = 0.02f; 
-    public float speedRotation; 
-   
-
-
     public float resistObstacles; 
     public int specialPower;
+    public float speed = 4f;
 
-    public float jump; 
+
+    // Private Atributes
+    float speedRotation = 90;
+    float jump = 100; 
+    GameObject obstaculoActual;
 
     //Public Scripts 
     public Grounded grounded;
     public Meta meta;
 
-    // Private Atributes
-    
-
-
     private void Update()
-    {
-        //!!!bloquear la camara 
-        
+    {               
       // Limitar la rotación en los ejes X y Z a 0
         Vector3 currentRotation = transform.rotation.eulerAngles;
         currentRotation.x = 0;
@@ -39,63 +35,66 @@ public class Dragon : MonoBehaviour
 
         if(meta.GameOn == true)
         {
-            //Moverse 
+         #region Moverse !!!
             if (Input.GetKey(KeyCode.W) && gameObject.tag == "Player")
             {           
-                transform.position -= transform.right *speed ;
+                transform.position -= transform.right *speed *Time.deltaTime;
             
             }
-            if (Input.GetKey(KeyCode.S) && gameObject.tag == "Player")
-            {           
-                transform.position += transform.right *speed ;
+
+            ////Ir hacia atras
+            //if (Input.GetKey(KeyCode.S) && gameObject.tag == "Player")
+            //{           
+            //    transform.position += transform.right *speed ;
             
-            }
+            //}
         
-            if (Input.GetKey(KeyCode.I) && gameObject.tag == "Player2")
+            if (Input.GetKey(KeyCode.UpArrow) && gameObject.tag == "Player2")
             {
-                transform.position -= transform.right * speed;
+                transform.position -= transform.right * speed * Time.deltaTime;
             }
-            if (Input.GetKey(KeyCode.K) && gameObject.tag == "Player2")
-            {
-                transform.position += transform.right * speed;
-            }
+            //if (Input.GetKey(KeyCode.DownArrow) && gameObject.tag == "Player2")
+            //{
+            //    transform.position += transform.right * speed;
+            //}
 
-        }
-
-        //Rotate
-        if(Input.GetKey(KeyCode.A) && gameObject.tag == "Player")
-        {           
-            Rotar(-1);
-           
-        }
-        if(Input.GetKey(KeyCode.D) && gameObject.tag == "Player")
-        {           
+        #endregion
+         #region Rotate
+        if (Input.GetKey(KeyCode.A) && gameObject.tag == "Player")                  
+            Rotar(-1);          
+        
+        if(Input.GetKey(KeyCode.D) && gameObject.tag == "Player")           
             Rotar(1);
-           
-        }
-        
-        
 
-        //Jump
-        if(grounded.isGrounded == true && Input.GetKeyDown(KeyCode.Space) && gameObject.tag == "Player")
+
+        if(Input.GetKey(KeyCode.LeftArrow) && gameObject.tag == "Player2")
+            Rotar(-1);
+
+        if (Input.GetKey(KeyCode.RightArrow) && gameObject.tag == "Player2")
+            Rotar(1);
+        #endregion
+         #region Jump !!!
+        if (grounded.isGrounded == true && Input.GetKeyDown(KeyCode.S) && gameObject.tag == "Player")
         {
-            gameObject.GetComponent<Rigidbody>().mass = 0.1f;  
-            transform.position += Vector3.up * jump;
+            //gameObject.GetComponent<Rigidbody>().mass = 0.1f;  
+            transform.position += Vector3.up * jump * Time.deltaTime;
                   
         }
-        if(grounded.isGrounded == true && Input.GetKeyDown(KeyCode.I) && gameObject.tag == "Player2")
+        if(grounded.isGrounded == true && Input.GetKeyDown(KeyCode.DownArrow) && gameObject.tag == "Player2")
         {
-            transform.position += Vector3.up * jump;
+            transform.position += Vector3.up * jump * Time.deltaTime;
             
         }
-        
+        #endregion 
+        }
+
     }
 
-#region Rotar al chocar con obstaculo
+    #region Rotar al chocar con obstaculo
     void Rotar(int direccion)
     {
         //Calcular angulo de rotacion
-        float rotation = speedRotation * direccion ;
+        float rotation = speedRotation * direccion * Time.deltaTime;
 
         //Rotar personaje
         //transform.Rotate(Vector3.up, rotation);
@@ -109,16 +108,24 @@ public class Dragon : MonoBehaviour
         {
             print("StartCoroutine");
             StartCoroutine(RotateCauseObstacle());
+            obstaculoActual = other.gameObject;
+            print("Fin Obstaculo");
+            
         }   
         
     }
     IEnumerator RotateCauseObstacle()
-    {  
+    {
+        //Desvincular la camara y guardar los datos antes de girar 
+        
+        quitarCam.SetParent(null);
+        Quaternion startRotation = transform.rotation;
+        print("rotacion P1: " + startRotation);
+        Vector3 startPosition = transform.position;
+
         print("RotateCauseObstacle");
         speed = 0;
-        speedRotation = 10; 
-        Quaternion startRotation = transform.rotation;
-        Vector3 startPosition = transform.position;
+        speedRotation = 600; 
 
         
         for(int i = 0; i < 10; i++)
@@ -128,13 +135,17 @@ public class Dragon : MonoBehaviour
             
         }
         //Se coloca en la misma rotacion y salta el obstaculo en x
-        transform.rotation = startRotation; 
-        transform.position = new Vector3 (startPosition.x - 1f, startPosition.y, startPosition.z);
+        transform.rotation = startRotation; print("rotacion P1: " + startRotation);
+        //transform.position = new Vector3 (startPosition.x -1, startPosition.y, startPosition.z);
+
         //Restablece los valores
-        yield return new WaitForSeconds(0.5f);    
-        speed = 0.02f;
-        speedRotation = 0.2f;
-        
+        yield return new WaitForSeconds(0.5f);
+        quitarCam.SetParent(transform);
+        quitarCam.localPosition = new Vector3(4.4f, 5.2f, -0.9f);
+        quitarCam.localEulerAngles = new Vector3(30.5f, 283, 359.6f);
+        speed = 4;
+        speedRotation = 90;
+        Destroy(obstaculoActual);
         
     }
     

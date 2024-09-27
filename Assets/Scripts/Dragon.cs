@@ -21,6 +21,7 @@ public class Dragon : MonoBehaviour
     float speedRotation = 90;
     float jump = 100; 
     GameObject obstaculoActual;
+    Vector3 rotacionInicial;
 
     //Public Scripts 
     public Grounded grounded;
@@ -121,10 +122,12 @@ public class Dragon : MonoBehaviour
 
         if(other.gameObject.tag == "Obstacle" && quitarObstaculos == false)
         {
+            Vector3 rotacionInicial = this.transform.rotation.eulerAngles;
             print("StartCoroutine");
             StartCoroutine(RotateCauseObstacle());
             obstaculoActual = other.gameObject;
             print("Fin Obstaculo");
+            
             
         }   
         
@@ -150,6 +153,7 @@ public class Dragon : MonoBehaviour
             
         }
         //Se coloca en la misma rotacion y salta el obstaculo en x
+       
         transform.rotation = startRotation; print("rotacion P1: " + startRotation);
         //transform.position = new Vector3 (startPosition.x -1, startPosition.y, startPosition.z);
 
@@ -160,6 +164,7 @@ public class Dragon : MonoBehaviour
         quitarCam.localEulerAngles = new Vector3(30.5f, 283, 359.6f);
         speed = 4;
         speedRotation = 90;
+        //transform.eulerAngles = rotacionInicial;
         Destroy(obstaculoActual);
         
     }

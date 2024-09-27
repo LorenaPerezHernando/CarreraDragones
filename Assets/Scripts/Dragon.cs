@@ -10,9 +10,10 @@ public class Dragon : MonoBehaviour
     //Pruba para github, borrar despues
     public Transform quitarCam;
 
+    public bool quitarObstaculos;
+
     public string nameDragon;
     public float resistObstacles; 
-    public int specialPower;
     public float speed = 4f;
 
 
@@ -95,7 +96,6 @@ public class Dragon : MonoBehaviour
     #region Rotar al chocar con obstaculo
     void Rotar(int direccion)
     {
-        print("J1");
         //Calcular angulo de rotacion
         float rotation = speedRotation * direccion * Time.deltaTime;
 
@@ -106,7 +106,7 @@ public class Dragon : MonoBehaviour
     }
     void Rotar2(int direccion)
     {
-        print("Rotate J2");
+       
         //Calcular angulo de rotacion
         float rotation = speedRotation * direccion * Time.deltaTime;
 
@@ -117,8 +117,9 @@ public class Dragon : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other) {
        
-      
-        if(other.gameObject.tag == "Obstacle")
+      //!!! Tendre que tener un GameObject Player y Player2 para que no roten? 
+
+        if(other.gameObject.tag == "Obstacle" && quitarObstaculos == false)
         {
             print("StartCoroutine");
             StartCoroutine(RotateCauseObstacle());

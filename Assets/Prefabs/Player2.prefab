@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3341226695943202594}
   m_Layer: 0
   m_Name: alaIzq
-  m_TagString: Player
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,6 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 683155341896598826}
+  - component: {fileID: 7140669416562548061}
   - component: {fileID: 9049110768980865592}
   - component: {fileID: 3675444931487156062}
   - component: {fileID: 8878349893882539954}
@@ -145,6 +146,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 8.837, z: 0}
+--- !u!114 &7140669416562548061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741462753647696103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c232645babe1c804fbbc7924a42baaaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numPoder: 0
+  circuloPoderActivado: {fileID: 0}
+  tintaJ1: {fileID: 0}
+  quitarObstaculos: 0
+  rival: {fileID: 0}
 --- !u!114 &9049110768980865592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,7 +178,6 @@ MonoBehaviour:
   quitarCam: {fileID: 6976717523469731532}
   nameDragon: 
   resistObstacles: 0
-  specialPower: 0
   speed: 4
   grounded: {fileID: 2398262773301665856}
   meta: {fileID: 0}
@@ -179,7 +196,7 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
@@ -211,7 +228,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 32
   m_CollisionDetection: 2
 --- !u!1 &1463930931766564935
 GameObject:
@@ -227,7 +244,7 @@ GameObject:
   - component: {fileID: 513354013928712315}
   m_Layer: 0
   m_Name: body
-  m_TagString: Player
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -456,7 +473,7 @@ GameObject:
   - component: {fileID: 4241378606146935893}
   m_Layer: 0
   m_Name: alaDer
-  m_TagString: Player
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -562,7 +579,7 @@ GameObject:
   - component: {fileID: 566548424357812166}
   m_Layer: 0
   m_Name: LegR
-  m_TagString: Player
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -760,7 +777,7 @@ GameObject:
   - component: {fileID: 8035573002230860803}
   m_Layer: 0
   m_Name: BackLegL
-  m_TagString: Player
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -866,7 +883,7 @@ GameObject:
   - component: {fileID: 1078398107657260841}
   m_Layer: 0
   m_Name: LegL
-  m_TagString: Player
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -972,7 +989,7 @@ GameObject:
   - component: {fileID: 5040985859080845336}
   m_Layer: 0
   m_Name: BackLegR
-  m_TagString: Player
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

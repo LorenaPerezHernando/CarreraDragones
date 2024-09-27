@@ -9,88 +9,143 @@ public class PoderEspecial : MonoBehaviour
 {
     //PONERLO EN LOS PODERES 
 
-    //Public Propertoes
-    public string namePower;
-    public Image tintaRival;
-    Image circuloPoder1;
-    Image circuloPoder2;
-    public Color color;
-    
-    [SerializeField] bool quitarObstaculos;
-    public GameObject rival;
-    public Transform camRival;
+    public GameObject player;
+    public GameObject player2; 
 
-    //!!ME FALTA EL COMO ACTIVAR UN CIRCULO PARA SABER QUE PODER TIENES
-    //PERO NO SE COMO HACER QUE SEPA SI ES DE AMIGO O RIVAL Y DE QUE COLOR TIENE QUE SER 
+    public string nombrePoder;
+    public int numPoderEspecial;
+    public Image poderActivadoJ1;
+    public Image poderActivadoJ2;
 
-
-    //Private Attributes
-    int numPoder;
-    string _namePower;
-    float _specialPower;
+    public PoderJ1 poderJ1;
+    public PoderJ2 poderJ2;
 
 
     private void Start()
     {
-        tintaRival.enabled = false;
-        circuloPoder1.enabled = false;
-        circuloPoder2.enabled = false;
+        poderJ1 = GameObject.FindGameObjectWithTag("Player").GetComponent<PoderJ1>();
+        poderJ2 = GameObject.FindGameObjectWithTag("Player2").GetComponent<PoderJ2>();
+        poderActivadoJ1.enabled = false;
+        poderActivadoJ2.enabled = false;
     }
     private void OnTriggerEnter(Collider other)
     {
-        
-        if (other.gameObject.tag == ("Player"))
+        Debug.Log("Trigger con " + other.gameObject.tag);
+        if (other.gameObject.tag == "Player2")
         {
-            rival = GameObject.FindWithTag("Player2");
-            camRival = rival.transform.Find("Camera");
-            //tintaRival en posicion de la camara rival
-            tintaRival.GetComponent<RectTransform>();
-            tintaRival.transform.position = camRival.transform.position;
-            
+            print("Player2");
+            if (numPoderEspecial == 1)
+            {
+                print("Player2 int1");
+                poderJ2.numPoder = 1;
+                poderActivadoJ2.enabled = true;
+                poderActivadoJ2.color = Color.magenta;
 
-            //!!LO DEL CIRCULO; PROBAR AQUI A PONER SI INT 1 Activar circuloJ1_1 Si INT 2 Activar CirculoJ1_2
-           
-            StartCoroutine(StartPower());
+            }
+
+            if (numPoderEspecial == 2)
+            {
+                poderJ2.numPoder = 2;
+                poderActivadoJ2.enabled = true;
+                poderActivadoJ2.color = Color.blue;
+            }
+
+            if (numPoderEspecial == 3)
+            {
+                poderJ2.numPoder = 3;
+                poderJ2.quitarObstaculos = true;
+                poderActivadoJ2.enabled = true;
+                poderActivadoJ2.color = Color.green;
+            }
         }
-        if (other.gameObject.tag == ("Player2"))
+
+        else if (other.gameObject.tag == "Player")
         {
-            rival = GameObject.FindWithTag("Player");
-            camRival = rival.transform.Find("Camera");
-            tintaRival.GetComponent<RectTransform>();
-            tintaRival.transform.position = camRival.transform.position;
+            print("Player1 Trigger Enter");
+            if (numPoderEspecial == 1 )
+            {
+                poderJ1.numPoder = 1;
+                poderActivadoJ1.enabled = true;
+                poderActivadoJ1.color = Color.magenta;
 
-            circuloPoder2.enabled = true;
+            }
 
-            //tintaRival en posicion de la camara rival
+            if (numPoderEspecial == 2)
+            {
+                poderJ1.numPoder = 2;
+                poderActivadoJ1.enabled = true;
+                poderActivadoJ1.color = Color.blue;
+            }
 
-            StartCoroutine(StartPower());
+            if (numPoderEspecial == 3)
+            {
+                poderJ1.numPoder = 3;
+                poderJ1.quitarObstaculos = true;
+                poderActivadoJ1.enabled = true;
+                poderActivadoJ1.color = Color.green;
+            }
         }
+
+
     }
 
-    IEnumerator StartPower()
+    private void OnCollisionEnter(Collision collision)
     {
-        if(numPoder == 1)
+        Debug.Log("Colision con " + gameObject.name);
+        if (collision.gameObject.tag == "Player2")
         {
-            print("Relentizar al compañero");
-            rival.GetComponent<Dragon>().speed = 2;
-            circuloPoder1.enabled=true;
-            //Activar circulo con el color del poder 
+            print("Player2");
+            if (numPoderEspecial == 1)
+            {
+                print("Player2 int1");
+                poderJ2.numPoder = 1;
+                poderActivadoJ2.enabled = true;
+                poderActivadoJ2.color = Color.magenta;
+
+            }
+
+            if (numPoderEspecial == 2)
+            {
+                poderJ2.numPoder = 2;
+                poderActivadoJ2.enabled = true;
+                poderActivadoJ2.color = Color.blue;
+            }
+
+            if (numPoderEspecial == 3)
+            {
+                poderJ2.numPoder = 3;
+                poderActivadoJ2.enabled = true;
+                poderActivadoJ2.color = Color.green;
+            }
         }
-        if (numPoder == 2)
+
+        else if (collision.gameObject.tag == "Player")
         {
-            print("Tinta");
-            tintaRival.enabled = true;
-            //Posicion cam -1x y activar tinta rival
+            print("Player1 Trigger Enter");
+            if (numPoderEspecial == 1 && collision.gameObject.tag == "Player")
+            {
+                poderJ1.numPoder = 1;
+                poderActivadoJ1.enabled = true;
+                poderActivadoJ1.color = Color.magenta;
+
+            }
+
+            if (numPoderEspecial == 2 && collision.gameObject.tag == "Player")
+            {
+                poderJ1.numPoder = 2;
+                poderActivadoJ1.enabled = true;
+                poderActivadoJ1.color = Color.blue;
+            }
+
+            if (numPoderEspecial == 3 && collision.gameObject.tag == "Player")
+            {
+                poderJ1.numPoder = 3;
+                poderActivadoJ1.enabled = true;
+                poderActivadoJ1.color = Color.green;
+            }
         }
-        if(numPoder == 3)
-        {
-            print("Desactivar obstaculos");
-            //Bool QuitarObstaculos y que el script dragon acceda a el en el trigger enter 
-            //Pero hacer que no entre en el primer if, osea ponerlo como el primer if 
-        }
-        yield return new WaitForSeconds(2);
-        //Restablecer los valores del bool y speed
-        rival.GetComponent<Dragon>().speed = 4;
-        tintaRival.enabled = false; 
+
     }
+
+
 }

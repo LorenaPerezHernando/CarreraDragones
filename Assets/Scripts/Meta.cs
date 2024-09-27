@@ -16,6 +16,7 @@ public class Meta : MonoBehaviour
     private void Start() 
     {
         panelP1.SetActive(false);
+        panelP2.SetActive(false);
     }
     
     private void OnCollisionEnter(Collision other)
@@ -26,5 +27,10 @@ public class Meta : MonoBehaviour
             GameOn = false;
 
         }   
+        if(other.gameObject.tag == "Player2")
+        {
+            panelP2.SetActive(true);
+            GameOn = false ;
+        }
     }
 }

@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PoderJ1 : MonoBehaviour
+public class PoderJ2 : MonoBehaviour
 {
     //Public Propertoes
     public int numPoder;
-    public Dragon dragon;
 
     public Image circuloPoderActivado;
-    public GameObject tintaJ2;
+    public GameObject tintaJ1;
     public bool quitarObstaculos;
+    public Dragon dragon;
 
     public GameObject rival;
 
@@ -20,7 +19,7 @@ public class PoderJ1 : MonoBehaviour
 
     void Start()
     {
-        tintaJ2.SetActive(false);
+        tintaJ1.SetActive(false);
         circuloPoderActivado.enabled = false;
         quitarObstaculos = false;
     }
@@ -28,14 +27,14 @@ public class PoderJ1 : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.Keypad0))
         {
             if (numPoder == 1)
                 StartCoroutine(Ralentizar());
 
-            if(numPoder == 2)
+            if (numPoder == 2)
                 StartCoroutine(TintaRival());
-            if(numPoder == 3)
+            if (numPoder == 3)
                 StartCoroutine(QuitarObstaculos());
 
         }
@@ -45,13 +44,12 @@ public class PoderJ1 : MonoBehaviour
     {
         float speedInicial = rival.GetComponent<Dragon>().speed;
         print("Relentizar al compañero");
-        circuloPoderActivado.color = Color.yellow;
-        rival.GetComponent<Dragon>().speed = 2;  
-        
+        rival.GetComponent<Dragon>().speed = 2;
+
         yield return new WaitForSeconds(4);
 
-        circuloPoderActivado.enabled = false; 
-        rival.GetComponent <Dragon>().speed = speedInicial;
+        circuloPoderActivado.enabled = false;
+        rival.GetComponent<Dragon>().speed = speedInicial;
         numPoder = 0;
     }
 
@@ -59,12 +57,12 @@ public class PoderJ1 : MonoBehaviour
     {
         print("Tinta");
         circuloPoderActivado.color = Color.yellow;
-        tintaJ2.SetActive(true);
+        tintaJ1.SetActive(true);
 
         yield return new WaitForSeconds(4);
 
         circuloPoderActivado.enabled = false;
-        tintaJ2.SetActive(false);
+        tintaJ1.SetActive(false);
         numPoder = 0;
     }
 
@@ -72,16 +70,20 @@ public class PoderJ1 : MonoBehaviour
     {
         circuloPoderActivado.color = Color.yellow;
         dragon.quitarObstaculos = true;
-        
         print("Quitar Obstaculos");
 
         yield return new WaitForSeconds(7);
         circuloPoderActivado.enabled = false;
         quitarObstaculos = false;
-        dragon.quitarObstaculos = false;
-        numPoder = 0; 
+        dragon.quitarObstaculos = false; 
+        numPoder = 0;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (quitarObstaculos == true && other.gameObject.tag == "Obstaculo")
+            Destroy(other.gameObject);
+    }
 
 
 }
